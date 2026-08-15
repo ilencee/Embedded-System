@@ -34,18 +34,39 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
 OF SUCH DAMAGE.
 */
 
-#ifndef SYSTICK_H
-#define SYSTICK_H
+#ifndef _SYSTICK_H_
+#define _SYSTICK_H_
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #include <stdint.h>
 
-/* 配置 systick，1ms 中断一次 */
-void systick_config(void);
-/* 阻塞延时指定毫秒数 */
-void delay_1ms(uint32_t count);
-/* systick 中断中递减延时计数 */
-void delay_decrement(void);
-/* 获取当前系统运行时间（ms） */
-uint32_t tick_ms_get(void);
+/**
+ * @brief  配置 systick，1ms 中断一次
+ */
+void Systick_Config(void);
 
-#endif /* SYSTICK_H */
+/**
+ * @brief  阻塞延时指定毫秒数
+ * @param[in] ms 延时毫秒数
+ */
+void Systick_DelayMs(uint32_t ms);
+
+/**
+ * @brief  systick 中断中递减延时计数（由 SysTick_Handler 调用）
+ */
+void Systick_DelayDecrement(void);
+
+/**
+ * @brief  获取当前系统运行时间
+ * @return 系统运行时间（单位 ms）
+ */
+uint32_t Systick_GetTickMs(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* _SYSTICK_H_ */

@@ -4,31 +4,38 @@
  *
  * @author  ilencee
  * @date    2026-08-15
- * @version V2.0.0
+ * @version V2.1.0
  */
 
 #include "gd32e23x.h"
 #include "systick.h"
+#include "disp.h"
 #include "fan.h"
 #include "pump.h"
+#include "uart.h"
 #include "zero.h"
-//#include "triac.h"
-1
+
+/* 主循环节拍（单位 ms） */
+#define MAIN_LOOP_PERIOD_MS 1U
+
 int main(void)
 {
-    /* 时钟与外设初始化（系统时钟已在 SystemInit() 配置为 72MHz，勿调用 rcu_deinit() 复位） */
-    systick_config();
-    fan_init();
-    pump_init();
-    zero_init();   /* 启用市电过零检测（PB0 + EXTI0 双边沿中断） */
+    /* 系统时钟已在 SystemInit() 中配置完成，此处勿调用 rcu_deinit() 复位 */
+    Systick_Config();
+    Fan_Init();
+    Pump_Init();
+    Uart_Init();    /* 初始化与显示板通信的串口（USART1 @ PA2/PA3） */
+    Zero_Init();    /* 启用市电过零检测（PB0 + EXTI0 双边沿中断） */
+    Disp_Init();    /* 复位显示板协议解析状态机与统计计数 */
 
     /* 上电后直接开启风扇与水泵 */
-    fan_switch_on();
-    pump_switch_on();
+    Fan_SwitchOn();
+    Pump_SwitchOn();
 
-    /* 主循环：当前为空转，预留后续业务逻辑 */
-    while(1){
-        delay_1ms(1);
-       // __WFI();  /* 进入低功耗模式，等待中断唤醒 */
+    /* 主循环：解析显示板协议帧（收到完整帧后按帧内容处理）
+     * （当前帧处理为打印，后续按协议命令表分发） */
+    while (1) {
+        Disp_Process();
+        Systick_DelayMs(MAIN_LOOP_PERIOD_MS);
     }
 }

@@ -34,8 +34,12 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
 OF SUCH DAMAGE.
 */
 
-#ifndef GD32E23X_IT_H
-#define GD32E23X_IT_H
+#ifndef _GD32E23X_IT_H_
+#define _GD32E23X_IT_H_
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #include "gd32e23x.h"
 
@@ -49,5 +53,13 @@ void SVC_Handler(void);
 void PendSV_Handler(void);
 /* SysTick 中断处理 */
 void SysTick_Handler(void);
+/* EXTI0_1 中断处理（市电过零） */
+void EXTI0_1_IRQHandler(void);
+/* USART1 中断处理（与显示板串口通信） */
+void USART1_IRQHandler(void);
 
-#endif /* GD32E23X_IT_H */
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* _GD32E23X_IT_H_ */

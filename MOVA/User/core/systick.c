@@ -34,43 +34,59 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
 OF SUCH DAMAGE.
 */
 
-#include "gd32e23x.h"
 #include "systick.h"
+#include "gd32e23x.h"
 
-volatile static uint32_t delay;
-volatile static uint32_t tick_ms;
+/* 阻塞延时计数（单位 ms，SysTick 中断中递减） */
+static volatile uint32_t s_delay = 0U;
 
-/* 配置 systick，1ms 中断一次 */
-void systick_config(void)
+/* 系统运行时间累计（单位 ms） */
+static volatile uint32_t s_tick_ms = 0U;
+
+/**
+ * @brief  配置 systick，1ms 中断一次
+ */
+void Systick_Config(void)
 {
-    /* 时钟频率除以 1000 得到 1ms 定时 */
-    if(SysTick_Config(SystemCoreClock / 1000U)) {
-        while(1) {
+    /* 系统时钟频率除以每秒毫秒数，得到 1ms 定时 */
+    if (SysTick_Config(SystemCoreClock / 1000U)) {
+        while (1) {
         }
     }
+    /* SysTick 使用最高优先级，保证延时精度 */
     NVIC_SetPriority(SysTick_IRQn, 0x00U);
 }
 
-/* 阻塞延时指定毫秒数 */
-void delay_1ms(uint32_t count)
+/**
+ * @brief  阻塞延时指定毫秒数
+ * @param[in] ms 延时毫秒数
+ * @note   依赖 SysTick 中断递减计数，若 SysTick 优先级低于当前中断会死锁；
+ *         严禁在中断服务函数中调用本函数
+ */
+void Systick_DelayMs(uint32_t ms)
 {
-    delay = count;
+    s_delay = ms;
 
-    while(0U != delay) {
+    while (0U != s_delay) {
     }
 }
 
-/* systick 中断中递减延时计数 */
-void delay_decrement(void)
+/**
+ * @brief  systick 中断中递减延时计数
+ */
+void Systick_DelayDecrement(void)
 {
-    if(0U != delay) {
-        delay--;
+    if (0U != s_delay) {
+        s_delay--;
     }
-    tick_ms++;
+    s_tick_ms++;
 }
 
-/* 获取当前系统运行时间（ms） */
-uint32_t tick_ms_get(void)
+/**
+ * @brief  获取当前系统运行时间
+ * @return 系统运行时间（单位 ms）
+ */
+uint32_t Systick_GetTickMs(void)
 {
-    return tick_ms;
+    return s_tick_ms;
 }
