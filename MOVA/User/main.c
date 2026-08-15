@@ -13,7 +13,7 @@
 #include "pump.h"
 #include "zero.h"
 //#include "triac.h"
-
+1
 int main(void)
 {
     /* 时钟与外设初始化（系统时钟已在 SystemInit() 配置为 72MHz，勿调用 rcu_deinit() 复位） */
