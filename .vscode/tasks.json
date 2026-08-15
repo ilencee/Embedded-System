@@ -1,0 +1,50 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Keil: Build MOVA",
+      "type": "shell",
+      "command": "cmd",
+      "args": [
+        "/d", "/c",
+        "\"D:\\Software\\Keil\\UV4\\UV4.exe\" -b -j0 MOVA.uvprojx -o build_log.txt & type build_log.txt"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}\\MOVA\\Project"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Keil: Rebuild MOVA",
+      "type": "shell",
+      "command": "cmd",
+      "args": [
+        "/d", "/c",
+        "\"D:\\Software\\Keil\\UV4\\UV4.exe\" -r -j0 MOVA.uvprojx -o build_log.txt & type build_log.txt"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}\\MOVA\\Project"
+      },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Keil: Download to Chip",
+      "type": "shell",
+      "command": "cmd",
+      "args": [
+        "/d", "/c",
+        "\"D:\\Software\\Keil\\UV4\\UV4.exe\" -f -j0 MOVA.uvprojx"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}\\MOVA\\Project"
+      },
+      "group": "build",
+      "problemMatcher": []
+    }
+  ]
+}
