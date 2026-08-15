@@ -20,22 +20,20 @@
 
 int main(void)
 {
-    /* 系统时钟已在 SystemInit() 中配置完成，此处勿调用 rcu_deinit() 复位 */
     Systick_Config();
     Fan_Init();
     Pump_Init();
     Uart_Init();    /* 初始化与显示板通信的串口（USART1 @ PA2/PA3） */
-    Zero_Init();    /* 启用市电过零检测（PB0 + EXTI0 双边沿中断） */
-    Disp_Init();    /* 复位显示板协议解析状态机与统计计数 */
+    //Zero_Init();    /* 启用市电过零检测（PB0 + EXTI0 双边沿中断） */
+    //Disp_Init();    /* 复位显示板协议解析状态机与统计计数 */
 
     /* 上电后直接开启风扇与水泵 */
     Fan_SwitchOn();
     Pump_SwitchOn();
 
-    /* 主循环：解析显示板协议帧（收到完整帧后按帧内容处理）
-     * （当前帧处理为打印，后续按协议命令表分发） */
     while (1) {
-        Disp_Process();
+        //Disp_Process();
+        Uart_EchoTest();    /* 串口回显测试 */
         Systick_DelayMs(MAIN_LOOP_PERIOD_MS);
     }
 }
