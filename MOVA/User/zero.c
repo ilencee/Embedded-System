@@ -26,7 +26,7 @@ volatile uint32_t zero_last_tick = 0U;
 #define ZERO_DEBOUNCE_MS  5U
 
 /* 过零检测初始化（PB0 + EXTI0 双边沿中断） */
-int zero_init(void)
+void zero_init(void)
 {
     /* SYSCFG 用于将 EXTI0 映射到 PB0 */
     rcu_periph_clock_enable(RCU_CFGCMP);
@@ -44,8 +44,6 @@ int zero_init(void)
 
     /* 低优先级，不阻塞主循环 */
     nvic_irq_enable(EXTI0_1_IRQn, 0x01U);
-
-    return 0;
 }
 
 /* 过零中断服务函数（由 EXTI0_1_IRQHandler 调用） */

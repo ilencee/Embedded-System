@@ -31,7 +31,7 @@ extern volatile uint32_t zero_full_period;
 extern volatile uint32_t zero_last_tick;
 
 /* 过零检测初始化（配置 GPIO、EXTI 中断） */
-int zero_init(void);
+void zero_init(void);
 
 /* 过零中断服务函数（由 EXTI0_1_IRQHandler 调用） */
 void zero_cross_isr(void);

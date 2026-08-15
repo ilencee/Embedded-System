@@ -9,7 +9,6 @@
 
 #include "gd32e23x.h"
 #include "systick.h"
-#include "main.h"
 #include "fan.h"
 #include "pump.h"
 #include "zero.h"
@@ -17,12 +16,11 @@
 
 int main(void)
 {
-    /* 时钟与外设初始化 */
-    rcu_deinit();
+    /* 时钟与外设初始化（系统时钟已在 SystemInit() 配置为 72MHz，勿调用 rcu_deinit() 复位） */
     systick_config();
     fan_init();
     pump_init();
-    //zero_init();   /* 过零检测暂未启用，如需市电过零功能请取消注释 */
+    zero_init();   /* 启用市电过零检测（PB0 + EXTI0 双边沿中断） */
 
     /* 上电后直接开启风扇与水泵 */
     fan_switch_on();
@@ -31,5 +29,6 @@ int main(void)
     /* 主循环：当前为空转，预留后续业务逻辑 */
     while(1){
         delay_1ms(1);
+       // __WFI();  /* 进入低功耗模式，等待中断唤醒 */
     }
 }
