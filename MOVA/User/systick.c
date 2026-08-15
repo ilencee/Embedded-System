@@ -1,9 +1,11 @@
-/*!
-    \file    systick.c
-    \brief   the systick configuration file
-
-    \version 2026-02-04, V2.5.0, firmware for GD32E23x
-*/
+/**
+ * @file    systick.c
+ * @brief   systick 定时器配置与延时实现
+ *
+ * @author  GigaDevice Semiconductor Inc.
+ * @date    2026-08-15
+ * @version V2.5.0
+ */
 
 /*
     Copyright (c) 2026, GigaDevice Semiconductor Inc.
@@ -38,30 +40,18 @@ OF SUCH DAMAGE.
 volatile static uint32_t delay;
 volatile static uint32_t tick_ms;
 
-/*!
-    \brief      configure systick
-    \param[in]  none
-    \param[out] none
-    \retval     none
-*/
+/* 配置 systick，1ms 中断一次 */
 void systick_config(void)
 {
-    /* setup systick timer for 1000Hz interrupts */
+    /* 时钟频率除以 1000 得到 1ms 定时 */
     if(SysTick_Config(SystemCoreClock / 1000U)) {
-        /* capture error */
         while(1) {
         }
     }
-    /* configure the systick handler priority */
     NVIC_SetPriority(SysTick_IRQn, 0x00U);
 }
 
-/*!
-    \brief      delay a time in milliseconds
-    \param[in]  count: count in milliseconds
-    \param[out] none
-    \retval     none
-*/
+/* 阻塞延时指定毫秒数 */
 void delay_1ms(uint32_t count)
 {
     delay = count;
@@ -70,12 +60,7 @@ void delay_1ms(uint32_t count)
     }
 }
 
-/*!
-    \brief      delay decrement
-    \param[in]  none
-    \param[out] none
-    \retval     none
-*/
+/* systick 中断中递减延时计数 */
 void delay_decrement(void)
 {
     if(0U != delay) {
@@ -84,12 +69,7 @@ void delay_decrement(void)
     tick_ms++;
 }
 
-/*!
-    \brief      get the current system tick in milliseconds
-    \param[in]  none
-    \param[out] none
-    \retval     current system tick in milliseconds
-*/
+/* 获取当前系统运行时间（ms） */
 uint32_t tick_ms_get(void)
 {
     return tick_ms;

@@ -1,36 +1,11 @@
-/*!
-    \file    main.c
-    \brief   led spark with systick, USART print and key example
-
-    \version 2026-02-04, V2.5.0, firmware for GD32E23x
-*/
-
-/*
-    Copyright (c) 2026, GigaDevice Semiconductor Inc.
-
-    Redistribution and use in source and binary forms, with or without modification,
-are permitted provided that the following conditions are met:
-
-    1. Redistributions of source code must retain the above copyright notice, this
-       list of conditions and the following disclaimer.
-    2. Redistributions in binary form must reproduce the above copyright notice,
-       this list of conditions and the following disclaimer in the documentation
-       and/or other materials provided with the distribution.
-    3. Neither the name of the copyright holder nor the names of its contributors
-       may be used to endorse or promote products derived from this software without
-       specific prior written permission.
-
-    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
-INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
-NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
-PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
-WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
-ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
-OF SUCH DAMAGE.
-*/
+/**
+ * @file    main.c
+ * @brief   主程序入口
+ *
+ * @author  ilencee
+ * @date    2026-08-15
+ * @version V2.0.0
+ */
 
 #include "gd32e23x.h"
 #include "systick.h"
@@ -40,25 +15,21 @@ OF SUCH DAMAGE.
 #include "zero.h"
 //#include "triac.h"
 
-
-
 int main(void)
 {
+    /* 时钟与外设初始化 */
     rcu_deinit();
     systick_config();
     fan_init();
     pump_init();
-    //zero_init();
-    
-    /* 置位一次，引脚持续保持高电平 */
-    gpio_bit_set(fan_port, fan_pin);
-    gpio_bit_set(pump_port, pump_pin);
+    //zero_init();   /* 过零检测暂未启用，如需市电过零功能请取消注释 */
 
+    /* 上电后直接开启风扇与水泵 */
+    fan_switch_on();
+    pump_switch_on();
+
+    /* 主循环：当前为空转，预留后续业务逻辑 */
     while(1){
-        /* 主循环，可添加其他逻辑 */
-            gpio_bit_set(fan_port, fan_pin);
-            delay_1ms(1); // 延时 1 秒
-    gpio_bit_set(pump_port, pump_pin);
+        delay_1ms(1);
     }
-    
 }

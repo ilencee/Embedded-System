@@ -1,9 +1,11 @@
-/*!
-    \file    main.h
-    \brief   the header file of main
-
-    \version 2026-02-04, V2.5.0, firmware for GD32E23x
-*/
+/**
+ * @file    main.h
+ * @brief   主程序头文件
+ *
+ * @author  GigaDevice Semiconductor Inc.
+ * @date    2026-08-15
+ * @version V2.5.0
+ */
 
 /*
     Copyright (c) 2026, GigaDevice Semiconductor Inc.

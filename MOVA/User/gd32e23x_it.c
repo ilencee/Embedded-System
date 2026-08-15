@@ -1,9 +1,11 @@
-/*!
-    \file    gd32e23x_it.c
-    \brief   interrupt service routines
-
-    \version 2026-02-04, V2.5.0, firmware for GD32E23x
-*/
+/**
+ * @file    gd32e23x_it.c
+ * @brief   中断服务函数实现
+ *
+ * @author  GigaDevice Semiconductor Inc.
+ * @date    2026-08-15
+ * @version V2.5.0
+ */
 
 /*
     Copyright (c) 2026, GigaDevice Semiconductor Inc.
@@ -38,81 +40,44 @@ OF SUCH DAMAGE.
 #include "zero.h"
 //#include "triac.h"
 
-//#define SRAM_PARITY_CHECK_ERROR_HANDLE(s)    do{}while(1)
-
-/*!
-    \brief      this function handles NMI exception
-    \param[in]  none
-    \param[out] none
-    \retval     none
-*/
+/* NMI 异常处理 */
 void NMI_Handler(void)
 {
 
 }
 
-/*!
-    \brief      this function handles HardFault exception
-    \param[in]  none
-    \param[out] none
-    \retval     none
-*/
+/* 硬件错误处理：进入死循环等待复位 */
 void HardFault_Handler(void)
 {
-    /* if Hard Fault exception occurs, go to infinite loop */
     while(1) {
     }
 }
 
-/*!
-    \brief      this function handles SVC exception
-    \param[in]  none
-    \param[out] none
-    \retval     none
-*/
+/* SVC 异常处理 */
 void SVC_Handler(void)
 {
-    /* if SVC exception occurs, go to infinite loop */
     while(1) {
     }
 }
 
-/*!
-    \brief      this function handles PendSV exception
-    \param[in]  none
-    \param[out] none
-    \retval     none
-*/
+/* PendSV 异常处理 */
 void PendSV_Handler(void)
 {
-    /* if PendSV exception occurs, go to infinite loop */
     while(1) {
     }
 }
 
-/*!
-    \brief      this function handles SysTick exception
-    \param[in]  none
-    \param[out] none
-    \retval     none
-*/
+/* SysTick 中断：递减延时计数并累计运行时间 */
 void SysTick_Handler(void)
 {
     delay_decrement();
 }
 
-/*!
-    \brief      this function handles EXTI0_1 exception
-    \param[in]  none
-    \param[out] none
-    \retval     none
-*/
+/* EXTI0_1 中断：处理市电过零信号 */
 void EXTI0_1_IRQHandler(void)
 {
     if(RESET != exti_interrupt_flag_get(EXTI_0)){
-        /* 清除 EXTI0 中断标志 */
         exti_interrupt_flag_clear(EXTI_0);
-        /* 调用过零检测处理 */
         zero_cross_isr();
     }
 }

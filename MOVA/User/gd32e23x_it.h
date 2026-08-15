@@ -1,9 +1,11 @@
-/*!
-    \file    gd32e23x_it.h
-    \brief   the header file of the ISR
-
-    \version 2026-02-04, V2.5.0, firmware for GD32E23x
-*/
+/**
+ * @file    gd32e23x_it.h
+ * @brief   中断服务函数接口声明
+ *
+ * @author  GigaDevice Semiconductor Inc.
+ * @date    2026-08-15
+ * @version V2.5.0
+ */
 
 /*
     Copyright (c) 2026, GigaDevice Semiconductor Inc.
@@ -37,16 +39,15 @@ OF SUCH DAMAGE.
 
 #include "gd32e23x.h"
 
-/* function declarations */
-/* this function handles NMI exception */
+/* NMI 异常处理 */
 void NMI_Handler(void);
-/* this function handles HardFault exception */
+/* 硬件错误处理 */
 void HardFault_Handler(void);
-/* this function handles SVC exception */
+/* SVC 异常处理 */
 void SVC_Handler(void);
-/* this function handles PendSV exception */
+/* PendSV 异常处理 */
 void PendSV_Handler(void);
-/* this function handles SysTick exception */
+/* SysTick 中断处理 */
 void SysTick_Handler(void);
 
 #endif /* GD32E23X_IT_H */

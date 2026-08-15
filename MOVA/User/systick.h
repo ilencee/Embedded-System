@@ -1,9 +1,11 @@
-/*!
-    \file    systick.h
-    \brief   the header file of systick
-
-    \version 2026-02-04, V2.5.0, firmware for GD32E23x
-*/
+/**
+ * @file    systick.h
+ * @brief   systick 定时器接口声明
+ *
+ * @author  GigaDevice Semiconductor Inc.
+ * @date    2026-08-15
+ * @version V2.5.0
+ */
 
 /*
     Copyright (c) 2026, GigaDevice Semiconductor Inc.
@@ -37,13 +39,13 @@ OF SUCH DAMAGE.
 
 #include <stdint.h>
 
-/* configure systick */
+/* 配置 systick，1ms 中断一次 */
 void systick_config(void);
-/* delay a time in milliseconds */
+/* 阻塞延时指定毫秒数 */
 void delay_1ms(uint32_t count);
-/* delay decrement */
+/* systick 中断中递减延时计数 */
 void delay_decrement(void);
-/* get the current system tick in milliseconds */
+/* 获取当前系统运行时间（ms） */
 uint32_t tick_ms_get(void);
 
 #endif /* SYSTICK_H */
