@@ -40,15 +40,13 @@ OF SUCH DAMAGE.
 #include "uart.h"
 #include "zero.h"
 
-/* ===== HardFault 现场信息（供调试器查看，定位死机原因） ===== */
+/* ===== HardFault 现场信息（供调试器查看，定位死机原因） =====
+ * 注：GD32E23x 的 core_cm23.h 为精简版，SCB_Type 未封装 CFSR/HFSR/BFAR/MMFAR，
+ *     故不读取这些故障寄存器，仅保存控制寄存器与栈帧 PC/LR 用于定位 */
 typedef struct {
     uint32_t control;   /* CONTROL 寄存器：bit1(SPSEL) 指示线程模式栈选择 */
     uint32_t msp;       /* 异常入口时 MSP */
     uint32_t psp;       /* 异常入口时 PSP */
-    uint32_t cfsr;      /* 可配置故障状态寄存器（MemManage/Bus/Usage） */
-    uint32_t hfsr;      /* 硬故障状态寄存器 */
-    uint32_t bfar;      /* 总线故障地址寄存器 */
-    uint32_t mmfar;     /* 存储器管理故障地址寄存器 */
     uint32_t pc;        /* 故障发生处 PC（从栈帧提取） */
     uint32_t lr;        /* 故障发生处 LR（从栈帧提取） */
 } HardFault_Info_t;
@@ -72,10 +70,6 @@ void HardFault_Handler(void)
     g_hf_info.control = __get_CONTROL();
     g_hf_info.msp     = __get_MSP();
     g_hf_info.psp     = __get_PSP();
-    g_hf_info.cfsr    = SCB->CFSR;
-    g_hf_info.hfsr    = SCB->HFSR;
-    g_hf_info.bfar    = SCB->BFAR;
-    g_hf_info.mmfar   = SCB->MMFAR;
 
     /* 2. 从故障栈帧提取 PC/LR（线程模式用 PSP，handler 模式用 MSP） */
     sp = (0U != (g_hf_info.control & 0x02U)) ? g_hf_info.psp : g_hf_info.msp;
