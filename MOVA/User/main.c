@@ -23,7 +23,7 @@ int main(void)
     Systick_Config();
     Fan_Init();
     Pump_Init();
-    Uart_Init();    /* 初始化与显示板通信的串口（USART1 @ PA2/PA3） */
+    //Uart_Init();    /* 初始化与显示板通信的串口（USART1 @ PA2/PA3） */
     //Zero_Init();    /* 启用市电过零检测（PB0 + EXTI0 双边沿中断） */
     //Disp_Init();    /* 复位显示板协议解析状态机与统计计数 */
 
