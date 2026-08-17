@@ -1,4 +1,4 @@
-./objects/systick.o: ..\User\systick.c \
+./objects/systick.o: ..\User\core\systick.c ..\User\core\systick.h \
   ..\Libraries\CMSIS\GD\GD32E23x\Include\gd32e23x.h \
   ..\Libraries\CMSIS\core_cm23.h \
   ..\Libraries\CMSIS\GD\GD32E23x\Include\system_gd32e23x.h \
@@ -21,5 +21,4 @@
   ..\Libraries\GD32E23x_standard_peripheral\Include\gd32e23x_syscfg.h \
   ..\Libraries\GD32E23x_standard_peripheral\Include\gd32e23x_timer.h \
   ..\Libraries\GD32E23x_standard_peripheral\Include\gd32e23x_usart.h \
-  ..\Libraries\GD32E23x_standard_peripheral\Include\gd32e23x_wwdgt.h \
-  ..\User\systick.h
+  ..\Libraries\GD32E23x_standard_peripheral\Include\gd32e23x_wwdgt.h

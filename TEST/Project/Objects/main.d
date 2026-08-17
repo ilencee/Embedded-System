@@ -22,4 +22,5 @@
   ..\Libraries\GD32E23x_standard_peripheral\Include\gd32e23x_timer.h \
   ..\Libraries\GD32E23x_standard_peripheral\Include\gd32e23x_usart.h \
   ..\Libraries\GD32E23x_standard_peripheral\Include\gd32e23x_wwdgt.h \
-  ..\User\systick.h ..\User\fan.h ..\User\pump.h ..\User\zero.h
+  ..\User\core\systick.h ..\User\app\disp.h ..\User\drivers\fan.h \
+  ..\User\drivers\pump.h ..\User\drivers\uart.h ..\User\drivers\zero.h

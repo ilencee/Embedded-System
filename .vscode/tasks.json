@@ -10,7 +10,7 @@
         "\"D:\\Software\\Keil\\UV4\\UV4.exe\" -b -j0 MOVA.uvprojx -o build_log.txt & type build_log.txt"
       ],
       "options": {
-        "cwd": "${workspaceFolder}\\MOVA\\Project"
+        "cwd": "${workspaceFolder}\\TEST\\Project"
       },
       "group": {
         "kind": "build",
@@ -27,7 +27,7 @@
         "\"D:\\Software\\Keil\\UV4\\UV4.exe\" -r -j0 MOVA.uvprojx -o build_log.txt & type build_log.txt"
       ],
       "options": {
-        "cwd": "${workspaceFolder}\\MOVA\\Project"
+        "cwd": "${workspaceFolder}\\TEST\\Project"
       },
       "group": "build",
       "problemMatcher": []
@@ -41,7 +41,7 @@
         "\"D:\\Software\\Keil\\UV4\\UV4.exe\" -f -j0 MOVA.uvprojx"
       ],
       "options": {
-        "cwd": "${workspaceFolder}\\MOVA\\Project"
+        "cwd": "${workspaceFolder}\\TEST\\Project"
       },
       "group": "build",
       "problemMatcher": []

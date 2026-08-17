@@ -1,4 +1,4 @@
-./objects/pump.o: ..\User\pump.c ..\User\pump.h \
+./objects/pump.o: ..\User\drivers\pump.c ..\User\drivers\pump.h \
   ..\Libraries\CMSIS\GD\GD32E23x\Include\gd32e23x.h \
   ..\Libraries\CMSIS\core_cm23.h \
   ..\Libraries\CMSIS\GD\GD32E23x\Include\system_gd32e23x.h \

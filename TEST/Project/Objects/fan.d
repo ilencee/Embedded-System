@@ -1,4 +1,4 @@
-./objects/fan.o: ..\User\fan.c ..\User\fan.h \
+./objects/fan.o: ..\User\drivers\fan.c ..\User\drivers\fan.h \
   ..\Libraries\CMSIS\GD\GD32E23x\Include\gd32e23x.h \
   ..\Libraries\CMSIS\core_cm23.h \
   ..\Libraries\CMSIS\GD\GD32E23x\Include\system_gd32e23x.h \

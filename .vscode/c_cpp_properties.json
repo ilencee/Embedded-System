@@ -12,18 +12,16 @@
       "cStandard": "c99",
       "intelliSenseMode": "windows-gcc-arm",
       "includePath": [
-        "${workspaceFolder}/MOVA/User",
-        "${workspaceFolder}/MOVA/User/core",
-        "${workspaceFolder}/MOVA/User/drivers",
-        "${workspaceFolder}/MOVA/User/app",
-        "${workspaceFolder}/MOVA/Libraries/CMSIS/GD/GD32E23x/Include",
-        "${workspaceFolder}/MOVA/Libraries/GD32E23x_standard_peripheral/Include",
-        "${workspaceFolder}/MOVA/Libraries/CMSIS",
+        "${workspaceFolder}/TEST/User",
+        "${workspaceFolder}/TEST/User/core",
+        "${workspaceFolder}/TEST/User/drivers",
+        "${workspaceFolder}/TEST/User/app",
+        "${workspaceFolder}/TEST/Libraries/CMSIS/GD/GD32E23x/Include",
+        "${workspaceFolder}/TEST/Libraries/GD32E23x_standard_peripheral/Include",
+        "${workspaceFolder}/TEST/Libraries/CMSIS",
         "D:/Software/Keil/ARM/ARMCLANG/include",
-        "${workspaceFolder}/MOVA/Project/RTE/_MOVA",
-        "C:/Users/86249/AppData/Local/Arm/Packs/ARM/CMSIS/6.2.0/CMSIS/Core/Include",
-        "${workspaceFolder}/MOVA/Project/Device/Include",
-        "C:/Users/86249/AppData/Local/Arm/Packs/GigaDevice/GD32E23x_DFP/2.5.0/Device/Include"
+        "${workspaceFolder}/TEST/Project/RTE/_MOVA",
+        "C:/Users/86249/AppData/Local/Arm/Packs/ARM/CMSIS/6.2.0/CMSIS/Core/Include"
       ],
       "defines": [
         "GD32E235",
